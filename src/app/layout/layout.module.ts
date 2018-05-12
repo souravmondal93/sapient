@@ -5,12 +5,15 @@ import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material';
 
 import { LayoutComponent } from './layout.component';
+import { ViewsModule } from '../views/views.module';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    MatToolbarModule
+    MatToolbarModule,
+
+    ViewsModule
   ],
   declarations: [
     LayoutComponent
