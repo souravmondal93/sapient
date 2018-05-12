@@ -1,10 +1,5 @@
-.example-card {
-  max-width: 400px;
-}
-
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
+.game-card {
+  width: calc(100% - 60px);
 }
 
 .star-icon {
@@ -16,5 +11,5 @@
 .score-container {
   position: absolute;
   bottom: 75px;
-  right: 15px;
+  right: 25px;
 }
