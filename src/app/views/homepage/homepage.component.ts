@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { GamesDataService } from '../../services/api/games.service';
 import { SearchService } from '../../services/helper/search.service';
 import { GamesService } from '../../services/helper/games.service';
+import { PaginationService } from '../../services/helper/pagination.service';
 
 import * as _ from 'lodash';
 
@@ -18,11 +19,14 @@ export class HomepageComponent implements OnInit {
   private searchedGamesList: any;
   private oldQueryString: string;
   private oldSortDirection: string;
+  startIndex = 1;
+  endIndex = 40;
 
   constructor(
     private gamesDataService: GamesDataService,
     private gamesService: GamesService,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private paginationService: PaginationService
   ) {}
 
   ngOnInit() {
@@ -35,9 +39,23 @@ export class HomepageComponent implements OnInit {
         this.allGamesList = [].concat(games);
         this.games = [].concat(games);
         this.gamesService.setGamesState(games);
+        this.gamesService.setDisplayedGamesState(games);
         this.games.forEach((game) => {
           game.genreList = game.genre.split(',').filter(Boolean);
         });
+      });
+
+    this.paginationService.getPaginationState()
+      .subscribe((paginationInfo) => {
+        if (!_.isEmpty(paginationInfo)) {
+          console.log('Page Info', paginationInfo);
+          const pageIndex = paginationInfo.pageIndex;
+          const  pageSize = paginationInfo.pageSize;
+
+          this.startIndex =  pageIndex * pageSize;
+          this.endIndex =  ((pageIndex + 1) * pageSize);
+          console.log(this.startIndex, this.endIndex)
+        }
       });
 
     this.searchService.getSearchState()
@@ -75,6 +93,7 @@ export class HomepageComponent implements OnInit {
           }
         }
 
+        this.gamesService.setDisplayedGamesState(this.searchedGamesList);
         this.oldQueryString = search.query;
         this.oldSortDirection = search.sort;
       });

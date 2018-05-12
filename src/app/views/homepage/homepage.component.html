@@ -1,5 +1,5 @@
 <mat-grid-list cols="4" rowHeight="170px" gutterSize="20px">
-  <mat-grid-tile *ngFor="let game of games | slice:0:20;">
+  <mat-grid-tile *ngFor="let game of games | slice:startIndex:endIndex;">
     <mat-card class="game-card">
       <mat-card-header>
         <mat-card-title>

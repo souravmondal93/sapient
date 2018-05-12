@@ -6,6 +6,7 @@ import { map, startWith } from 'rxjs/operators';
 
 import { SearchService } from '../services/helper/search.service';
 import { GamesService } from '../services/helper/games.service';
+import { PaginationService } from '../services/helper/pagination.service';
 
 @Component({
   selector: 'app-layout',
@@ -20,10 +21,14 @@ export class LayoutComponent implements OnInit {
   searchFormControl = new FormControl();
   formControlSubscriber: Subscription;
   filteredGames: Observable<any[]>;
+  pageSizeOptions = [20, 40, 100, 200];
+  length = 0;
+  pageSize = 40;
 
   constructor(
     private searchService: SearchService,
-    private gamesService: GamesService
+    private gamesService: GamesService,
+    private paginationService: PaginationService
   ) { }
 
   ngOnInit() {
@@ -44,6 +49,13 @@ export class LayoutComponent implements OnInit {
       .subscribe((games) => {
         console.log('Games List', games);
         this.gamesList = games;
+      });
+
+    this.gamesService.getDisplayedGamesState()
+      .subscribe((displayedGames) => {
+        if (displayedGames) {
+          this.length = displayedGames.length;
+        }
       });
   }
 
@@ -68,5 +80,9 @@ export class LayoutComponent implements OnInit {
         game.title.toLowerCase().includes(query.toLowerCase());
       }
     });
+  }
+
+  pageEvent(event) {
+    this.paginationService.setPaginationState(event);
   }
 }
