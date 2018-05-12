@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl} from '@angular/forms';
+import { Subscription } from 'rxjs/index';
+import 'rxjs/add/operator/debounceTime';
+
+import { SearchService } from '../services/helper/search.service';
 
 @Component({
   selector: 'app-layout',
@@ -7,9 +12,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
 
-  constructor() { }
+  private searchString = '';
+  private sortDirection = '';
+  searchFormControl = new FormControl();
+  formControlSubscriber: Subscription;
+
+  constructor(
+    private searchService: SearchService
+  ) { }
 
   ngOnInit() {
-  }
 
+    this.formControlSubscriber = this.searchFormControl.valueChanges
+      .debounceTime(500)
+      .subscribe(newValue => {
+        this.searchString = newValue;
+        this.searchService.setSearchState({query: this.searchString, sort: this.sortDirection});
+      });
+  }
 }
