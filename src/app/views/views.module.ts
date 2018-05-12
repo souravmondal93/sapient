@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MatCardModule, MatGridListModule, MatButtonModule, MatChipsModule, MatIconModule, MatTooltipModule } from '@angular/material';
+import { MatCardModule, MatGridListModule, MatButtonModule, MatChipsModule, MatIconModule, MatTooltipModule, MatProgressSpinnerModule } from '@angular/material';
 
 import { HomepageComponent } from './homepage/homepage.component';
 
@@ -13,7 +13,8 @@ import { HomepageComponent } from './homepage/homepage.component';
     MatButtonModule,
     MatChipsModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressSpinnerModule
   ],
   declarations: [
     HomepageComponent

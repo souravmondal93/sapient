@@ -1,27 +1,32 @@
-<mat-grid-list cols="4" rowHeight="170px" gutterSize="20px">
-  <mat-grid-tile *ngFor="let game of games | slice:startIndex:endIndex;">
-    <mat-card class="game-card">
-      <mat-card-header>
-        <mat-card-title>
-          {{game.title}} - {{game.release_year}}
-          <span *ngIf="game.editors_choice == 'Y'" class="star-icon clickable" matTooltip="Editor's Choice!" [matTooltipPosition]="'right'">
+<div *ngIf="loadingGames" class="spinner">
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="!loadingGames">
+  <mat-grid-list cols="4" rowHeight="170px" gutterSize="20px">
+    <mat-grid-tile *ngFor="let game of games | slice:startIndex:endIndex;">
+      <mat-card class="game-card">
+        <mat-card-header>
+          <mat-card-title>
+            {{game.title}} - {{game.release_year}}
+            <span *ngIf="game.editors_choice == 'Y'" class="star-icon clickable" matTooltip="Editor's Choice!" [matTooltipPosition]="'right'">
             <mat-icon>star</mat-icon>
           </span>
-        </mat-card-title>
-        <mat-card-subtitle>{{game.platform}}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content class="relative">
-        <ng-container *ngIf="game.genreList.length">
-          <mat-chip-list [selectable]="false">
-            <mat-chip color="'primary'" *ngFor="let genre of game.genreList">{{genre}}</mat-chip>
-          </mat-chip-list>
-        </ng-container>
-        <div class="score-container">
+          </mat-card-title>
+          <mat-card-subtitle>{{game.platform}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="relative">
+          <ng-container *ngIf="game.genreList.length">
+            <mat-chip-list [selectable]="false">
+              <mat-chip color="'primary'" *ngFor="let genre of game.genreList">{{genre}}</mat-chip>
+            </mat-chip-list>
+          </ng-container>
+          <div class="score-container">
           <span>
             Score: {{game.score}}/10
           </span>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </mat-grid-tile>
-</mat-grid-list>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

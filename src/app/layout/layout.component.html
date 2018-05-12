@@ -13,7 +13,7 @@
       </mat-autocomplete>
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
-    <mat-icon class="example-icon clickable" (click)="changeSortDirection()">sort</mat-icon>
+    <mat-icon class="example-icon clickable" (click)="changeSortDirection()" matTooltip="Sort based on Score" [matTooltipPosition]="'left'">sort</mat-icon>
     <mat-icon class="example-icon clickable" *ngIf="sortDirection === 'ASC'" matTooltip="Sorted by Ascending Score" [matTooltipPosition]="'left'">arrow_drop_up</mat-icon>
     <mat-icon class="example-icon clickable" *ngIf="sortDirection === 'DESC'" matTooltip="Sorted by Descending Score" [matTooltipPosition]="'left'">arrow_drop_down</mat-icon>
   </mat-toolbar-row>

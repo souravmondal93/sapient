@@ -21,6 +21,7 @@ export class HomepageComponent implements OnInit {
   private oldSortDirection: string;
   startIndex = 1;
   endIndex = 40;
+  loadingGames = true;
 
   constructor(
     private gamesDataService: GamesDataService,
@@ -36,6 +37,7 @@ export class HomepageComponent implements OnInit {
   getGames(): void {
     this.gamesDataService.getGames()
       .subscribe(games => {
+        this.loadingGames = false;
         this.allGamesList = [].concat(games);
         this.games = [].concat(games);
         this.gamesService.setGamesState(games);
