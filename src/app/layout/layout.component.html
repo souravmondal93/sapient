@@ -4,13 +4,12 @@
     <span class="example-spacer"></span>
     <mat-form-field class="example-full-width">
       <input matInput
-             [matAutocomplete]="auto"
              [formControl]="searchFormControl">
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let game of filteredGames | async" [value]="game.title">
-          {{ game.title }}
-        </mat-option>
-      </mat-autocomplete>
+      <!--<mat-autocomplete #auto="matAutocomplete">-->
+        <!--<mat-option *ngFor="let game of filteredGames | async" [value]="game.title">-->
+          <!--{{ game.title }}-->
+        <!--</mat-option>-->
+      <!--</mat-autocomplete>-->
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
     <mat-icon class="example-icon clickable" (click)="changeSortDirection()" matTooltip="Sort based on Score" [matTooltipPosition]="'left'">sort</mat-icon>

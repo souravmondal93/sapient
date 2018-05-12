@@ -53,8 +53,12 @@ export class HomepageComponent implements OnInit {
           const pageIndex = paginationInfo.pageIndex;
           const  pageSize = paginationInfo.pageSize;
 
-          this.startIndex =  pageIndex * pageSize;
-          this.endIndex =  ((pageIndex + 1) * pageSize);
+          this.startIndex =  (pageIndex - 1) * pageSize;
+          if (((pageIndex + 1) * pageSize) > pageSize) {
+            this.endIndex = (pageIndex + 1) * pageSize;
+          } else {
+            this.endIndex = this.games.length;
+          }
         }
       });
 
@@ -74,6 +78,8 @@ export class HomepageComponent implements OnInit {
             this.games = [].concat(this.allGamesList);
             this.searchedGamesList = [].concat(this.allGamesList);
           }
+
+          console.log(this.games);
         }
 
         if (search.sort !== undefined && this.oldSortDirection !== search.sort) {
