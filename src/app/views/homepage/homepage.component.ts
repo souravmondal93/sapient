@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { GamesService } from '../../services/api/games.service';
 import { SearchService } from '../../services/helper/search.service';
 
+import * as _ from 'lodash'
+
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
@@ -12,6 +14,7 @@ export class HomepageComponent implements OnInit {
 
   public games: any;
   private allGamesList: any;
+  private searchedGamesList: any;
   private allAscSortedGamesList: any;
   private allDescSortedGamesList: any;
   private oldQueryString: string;
@@ -30,45 +33,42 @@ export class HomepageComponent implements OnInit {
     this.gamesService.getGames()
       .subscribe(games => {
         this.allGamesList = [].concat(games);
-        this.games = games;
+        this.games = [].concat(games);
         this.games.forEach((game) => {
           game.genreList = game.genre.split(',').filter(Boolean);
         });
-
-        const arrayAscCopy = [].concat(this.allGamesList);
-        const arrayDescCopy = [].concat(this.allGamesList);
-
-        this.allAscSortedGamesList = arrayAscCopy.sort((a, b) => parseFloat(a.score) - parseFloat(b.score));
-        this.allDescSortedGamesList = arrayDescCopy.sort((a, b) => parseFloat(b.score) - parseFloat(a.score));
       });
 
     this.searchService.getSearchState()
       .subscribe( search => {
         if (this.oldQueryString !== search.query) {
           if (this.allGamesList && this.allGamesList.length && search.query !== '') {
-            this.games = this.allGamesList.filter((game) => {
+            this.searchedGamesList = this.allGamesList.concat().filter((game) => {
               if (game.title.length) {
                 return game.title.toLowerCase().includes(search.query.toLowerCase());
               }
             });
+            this.games = [].concat(this.searchedGamesList);
           }
 
           if (this.allGamesList && this.allGamesList.length && search.query === '') {
             this.games = [].concat(this.allGamesList);
+            this.searchedGamesList = [].concat(this.allGamesList);
           }
         }
 
-        if (this.oldSortDirection !== search.sort) {
+        if (search.sort !== undefined && this.oldSortDirection !== search.sort) {
+          const gamesListCopy = [].concat(this.searchedGamesList);
           if (this.allGamesList && this.allGamesList.length) {
             switch (search.sort) {
               case 'ASC':
-                this.games = [].concat(this.allAscSortedGamesList);
+                this.games = _.sortBy(gamesListCopy, ['score']);
                 break;
               case 'DESC':
-                this.games = [].concat(this.allDescSortedGamesList);
+                this.games = _.sortBy(gamesListCopy, ['score']).reverse();
                 break;
               case '':
-                this.games = [].concat(this.allGamesList);
+                this.games = [].concat(this.searchedGamesList);
                 break;
             }
           }

@@ -3,14 +3,14 @@
     <span>Sapient Games</span>
     <span class="example-spacer"></span>
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="Search"
+      <input matInput
              [value]="searchString"
              [formControl]="searchFormControl">
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
-    <mat-icon class="example-icon" (click)="changeSortDirection()">sort</mat-icon>
-    <mat-icon class="example-icon" *ngIf="sortDirection === 'ASC'">arrow_drop_up</mat-icon>
-    <mat-icon class="example-icon" *ngIf="sortDirection === 'DESC'">arrow_drop_down</mat-icon>
+    <mat-icon class="example-icon clickable" (click)="changeSortDirection()">sort</mat-icon>
+    <mat-icon class="example-icon clickable" *ngIf="sortDirection === 'ASC'" matTooltip="Sorted by Ascending Score" [matTooltipPosition]="'left'">arrow_drop_up</mat-icon>
+    <mat-icon class="example-icon clickable" *ngIf="sortDirection === 'DESC'" matTooltip="Sorted by Descending Score" [matTooltipPosition]="'left'">arrow_drop_down</mat-icon>
   </mat-toolbar-row>
 </mat-toolbar>
 
