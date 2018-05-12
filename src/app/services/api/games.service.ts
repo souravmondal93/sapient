@@ -6,7 +6,7 @@ import { apiUrl } from '../../config/constants';
 @Injectable({
   providedIn: 'root'
 })
-export class GamesService {
+export class GamesDataService {
 
   private baseUrl: string = apiUrl;
 
@@ -16,5 +16,9 @@ export class GamesService {
 
   getGames() {
     return this.http.get(this.baseUrl);
+  }
+
+  getGamebyUrl(url) {
+    return this.http.get(this.baseUrl + url);
   }
 }

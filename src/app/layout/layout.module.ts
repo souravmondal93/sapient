@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { MatToolbarModule, MatIconModule, MatInputModule, MatTooltipModule } from '@angular/material';
+import { MatToolbarModule, MatIconModule, MatInputModule, MatTooltipModule, MatAutocompleteModule } from '@angular/material';
 
 import { LayoutComponent } from './layout.component';
 import { ViewsModule } from '../views/views.module';
@@ -17,6 +17,7 @@ import { ViewsModule } from '../views/views.module';
     MatInputModule,
     MatIconModule,
     MatTooltipModule,
+    MatAutocompleteModule,
 
     ViewsModule
   ],

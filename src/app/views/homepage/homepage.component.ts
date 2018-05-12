@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { GamesService } from '../../services/api/games.service';
+import { GamesDataService } from '../../services/api/games.service';
 import { SearchService } from '../../services/helper/search.service';
+import { GamesService } from '../../services/helper/games.service';
 
-import * as _ from 'lodash'
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-homepage',
@@ -15,12 +16,11 @@ export class HomepageComponent implements OnInit {
   public games: any;
   private allGamesList: any;
   private searchedGamesList: any;
-  private allAscSortedGamesList: any;
-  private allDescSortedGamesList: any;
   private oldQueryString: string;
   private oldSortDirection: string;
 
   constructor(
+    private gamesDataService: GamesDataService,
     private gamesService: GamesService,
     private searchService: SearchService
   ) {}
@@ -30,10 +30,11 @@ export class HomepageComponent implements OnInit {
   }
 
   getGames(): void {
-    this.gamesService.getGames()
+    this.gamesDataService.getGames()
       .subscribe(games => {
         this.allGamesList = [].concat(games);
         this.games = [].concat(games);
+        this.gamesService.setGamesState(games);
         this.games.forEach((game) => {
           game.genreList = game.genre.split(',').filter(Boolean);
         });
