@@ -48,13 +48,11 @@ export class HomepageComponent implements OnInit {
     this.paginationService.getPaginationState()
       .subscribe((paginationInfo) => {
         if (!_.isEmpty(paginationInfo)) {
-          console.log('Page Info', paginationInfo);
           const pageIndex = paginationInfo.pageIndex;
           const  pageSize = paginationInfo.pageSize;
 
           this.startIndex =  pageIndex * pageSize;
           this.endIndex =  ((pageIndex + 1) * pageSize);
-          console.log(this.startIndex, this.endIndex)
         }
       });
 

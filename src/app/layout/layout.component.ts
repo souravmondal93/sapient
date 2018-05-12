@@ -47,7 +47,6 @@ export class LayoutComponent implements OnInit {
 
     this.gamesService.getGamesState()
       .subscribe((games) => {
-        console.log('Games List', games);
         this.gamesList = games;
       });
 
