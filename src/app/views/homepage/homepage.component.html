@@ -10,7 +10,7 @@
         </mat-card-title>
         <mat-card-subtitle>{{game.platform}}</mat-card-subtitle>
       </mat-card-header>
-      <mat-card-content>
+      <mat-card-content class="relative">
         <ng-container *ngIf="game.genreList.length">
           <mat-chip-list [selectable]="false">
             <mat-chip color="'primary'" *ngFor="let genre of game.genreList">{{genre}}</mat-chip>

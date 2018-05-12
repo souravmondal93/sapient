@@ -1,5 +1,6 @@
 .game-card {
   width: calc(100% - 60px);
+  min-height: 100px;
 }
 
 .star-icon {
@@ -10,6 +11,6 @@
 
 .score-container {
   position: absolute;
-  bottom: 75px;
+  top: 10px;
   right: 25px;
 }
