@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatIconRegistry } from '@angular/material';
+
+import { GamesService } from '../../services/api/games.service';
 
 @Component({
   selector: 'app-homepage',
@@ -7,11 +11,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
 
-  public dogs: Array<number> = [1, 2, 3, 4];
+  public games: any;
 
-  constructor() { }
+  constructor(
+    private gamesService: GamesService
+  ) {}
 
   ngOnInit() {
+    this.getGames();
+  }
+
+  getGames(): void {
+    this.gamesService.getGames()
+      .subscribe(games => {
+        this.games = games;
+        this.games.forEach((game) => {
+          game.genreList = game.genre.split(',').filter(Boolean);
+        });
+        console.log(this.games);
+      });
   }
 
 }

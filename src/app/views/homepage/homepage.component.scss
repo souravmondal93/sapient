@@ -6,3 +6,15 @@
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
 }
+
+.star-icon {
+  color: #FFD700;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.score-container {
+  position: absolute;
+  bottom: 75px;
+  right: 15px;
+}
