@@ -8,9 +8,9 @@
              [formControl]="searchFormControl">
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
-    <mat-icon class="example-icon">sort</mat-icon>
-    <mat-icon class="example-icon">arrow_drop_up</mat-icon>
-    <mat-icon class="example-icon">arrow_drop_down</mat-icon>
+    <mat-icon class="example-icon" (click)="changeSortDirection()">sort</mat-icon>
+    <mat-icon class="example-icon" *ngIf="sortDirection === 'ASC'">arrow_drop_up</mat-icon>
+    <mat-icon class="example-icon" *ngIf="sortDirection === 'DESC'">arrow_drop_down</mat-icon>
   </mat-toolbar-row>
 </mat-toolbar>
 

@@ -13,7 +13,7 @@ import { SearchService } from '../services/helper/search.service';
 export class LayoutComponent implements OnInit {
 
   private searchString = '';
-  private sortDirection = '';
+  sortDirection = '';
   searchFormControl = new FormControl();
   formControlSubscriber: Subscription;
 
@@ -29,5 +29,20 @@ export class LayoutComponent implements OnInit {
         this.searchString = newValue;
         this.searchService.setSearchState({query: this.searchString, sort: this.sortDirection});
       });
+  }
+
+  changeSortDirection () {
+    switch (this.sortDirection) {
+      case '':
+        this.sortDirection = 'ASC';
+        break;
+      case 'ASC':
+        this.sortDirection = 'DESC';
+        break;
+      case 'DESC':
+        this.sortDirection = '';
+        break;
+    }
+    this.searchService.setSearchState({query: this.searchString, sort: this.sortDirection});
   }
 }

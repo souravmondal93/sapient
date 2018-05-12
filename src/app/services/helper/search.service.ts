@@ -6,12 +6,10 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SearchService {
 
-  private initialSearchState = [
-    {
+  private initialSearchState = {
       query: '',
       sort: ''
-    }
-  ];
+    };
 
   private _searchDetails: BehaviorSubject<any> = new BehaviorSubject(this.initialSearchState);
 
